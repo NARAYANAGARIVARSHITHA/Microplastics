@@ -1,0 +1,58 @@
+ %--- C++codecontent--
+ charr;
+
+ voidsetup() {
+ pinMode(13,OUTPUT); //forwardmotionofleftmotor
+ pinMode(12,OUTPUT); //reversemotionofleftmotor
+ pinMode(11,OUTPUT); //forwardmotionofrightmotor
+ pinMode(10,OUTPUT); //reversemotionofrightmotor
+ Serial.begin(9600); //initializeserialat9600bps
+ }
+
+ voidloop() {
+ if(Serial.available()){
+ r= Serial.read();
+ Serial.println(r); //Addedsemicolon
+ }
+
+ //Stoppreviousmotionbeforestartingnewone
+ digitalWrite(10,LOW);
+ digitalWrite(11,LOW);
+digitalWrite(12,LOW);
+ digitalWrite(13,LOW);
+
+ if(r== ’F’){ //Forward
+ digitalWrite(13,HIGH);
+ digitalWrite(11,HIGH);
+ }
+elseif(r ==’B’){ //Backward
+ digitalWrite(12,HIGH);
+ digitalWrite(10,HIGH);
+ }
+ elseif(r ==’L’){ //LeftTurn(Rightmotorfwd,Left
+ motoroff/rev?)
+//Current:LeftOFF,RightFWD=
+ TurnsLeft
+digitalWrite(13,LOW); //EnsureLeftmotorFWDisoff
+digitalWrite(12,LOW); //EnsureLeftmotorREVisoff
+  digitalWrite(11,HIGH); //RightmotorFWDON
+  digitalWrite(10,LOW); //EnsureRightmotorREVisoff
+  }
+  elseif(r ==’R’){ //RightTurn(Leftmotorfwd,
+ Rightmotoroff/rev?)
+  //Current:LeftFWD,RightOFF=
+ TurnsRight
+  digitalWrite(13,HIGH); //LeftmotorFWDON
+  digitalWrite(12,LOW); //EnsureLeftmotorREVisoff
+  digitalWrite(11,LOW); //EnsureRightmotorFWDisoff
+  digitalWrite(10,LOW); //EnsureRightmotorREVisoff
+  }
+  elseif(r ==’S’){ //Stop-Alreadyhandledbythe
+ codeblockabove
+  //AllpinssetLOWimplicitlybytheblockbeforethe
+ if/elsechain
+  }
+ 
+  delay(100); //100msloopdelay
+  }
+  %--- EndC++codecontent---
